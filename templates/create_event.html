@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="panel">
+    <h2>Create Event</h2>
+    <form method="POST" action="{{ url_for('create_event') }}">
+        <label for="title">Event Title</label>
+        <input type="text" id="title" name="title" required />
+
+        <label for="date">Date</label>
+        <input type="date" id="date" name="date" required />
+
+        <label for="venue">Venue</label>
+        <input type="text" id="venue" name="venue" required />
+
+        <label for="theme">Theme</label>
+        <input type="text" id="theme" name="theme" placeholder="e.g. Summer Fiesta" required />
+
+        <button class="button primary" type="submit">Create Event</button>
+    </form>
+</div>
+{% endblock %}
