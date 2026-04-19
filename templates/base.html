@@ -9,15 +9,15 @@
 <body>
     <header class="topbar">
         <div class="container nav-container">
-            <a class="brand" href="{{ url_for('home') }}">EVENTIFY</a>
+            <a class="brand" href="{{ url_for('home') }}">EVENT</a>
             <nav class="nav-links">
                 <a class="nav-item" href="{{ url_for('home') }}">Home</a>
+                <a class="nav-item" href="{{ url_for('create_event') }}">Create Event</a>
+                <a class="nav-item" href="{{ url_for('dashboard') }}">Dashboard</a>
                 {% if session.user_id %}
-                    <a class="nav-item" href="{{ url_for('create_event') }}">Create Event</a>
-                    <a class="nav-item" href="{{ url_for('dashboard') }}">Dashboard</a>
-                    <a class="nav-item" href="{{ url_for('logout') }}">Logout</a>
+                    <a class="nav-button" href="{{ url_for('logout') }}">Logout</a>
                 {% else %}
-                    <a class="nav-item" href="{{ url_for('login') }}">Login/Register</a>
+                    <a class="nav-button" href="{{ url_for('login') }}">Login/Register</a>
                 {% endif %}
             </nav>
         </div>
@@ -38,7 +38,18 @@
     </main>
 
     <footer class="footer">
-        <p>&copy; 2026 Event Planner. Simple booking and event creation.</p>
+        <div class="footer-row">
+            <div class="footer-links">
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="footer-links footer-socials">
+                <a href="#">Twitter</a>
+                <a href="#">Instagram</a>
+                <a href="#">LinkedIn</a>
+            </div>
+        </div>
+        <p class="footer-copy">&copy; 2026 Event Planner.</p>
     </footer>
 
     <script>

@@ -1,35 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
-<section class="hero">
-    <div class="hero__bg"></div>
-    <div class="hero__overlay"></div>
-    <div class="hero__content">
-        <h1 class="hero-title">EVENTIFY</h1>
-        <p class="hero-tagline">Plan, Create & Book Events Effortlessly</p>
-        <div class="hero-actions">
-            {% if session.user_id %}
-                <a class="button primary hero-button" href="{{ url_for('create_event') }}">Create Event</a>
-            {% else %}
-                <a class="button primary hero-button" href="{{ url_for('login') }}">Login/Register</a>
-            {% endif %}
+<section class="home-hero">
+    <div class="hero-card">
+        <div class="hero-media"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-logo">
+            <h1>EVENTIFY</h1>
         </div>
+    </div>
+    <div class="hero-copy">
+        <h2>Plan, Create & Book Events Effortlessly</h2>
+        <p>Your all-in-one platform to manage and attend events</p>
     </div>
 </section>
 
-<div class="grid">
-    {% if events %}
-        {% for event in events %}
-            <article class="card">
-                <h3>{{ event.Title }}</h3>
-                <p><strong>Theme:</strong> {{ event.Theme }}</p>
-                <p><strong>Date:</strong> {{ event.Date }}</p>
-                <p><strong>Venue:</strong> {{ event.Venue }}</p>
-                <p><strong>Organizer:</strong> {{ event.Organizer }}</p>
-                <a class="button primary" href="{{ url_for('book_event', event_id=event.Event_ID) }}">Book Now</a>
-            </article>
-        {% endfor %}
-    {% else %}
-        <p>No events available yet. Sign in to create the first event.</p>
-    {% endif %}
-</div>
 {% endblock %}
