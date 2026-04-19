@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-header">
+    <h2>My Dashboard</h2>
+    <p>See your booked events and the events you have hosted.</p>
+</div>
+
+<section class="split-grid">
+    <div class="panel panel-light">
+        <h3>My Bookings</h3>
+        {% if bookings %}
+            <ul class="list-card">
+                {% for booking in bookings %}
+                    <li>
+                        <strong>{{ booking.Title }}</strong>
+                        <p><strong>Theme:</strong> {{ booking.Theme }}</p>
+                        <p>{{ booking.Date }} | {{ booking.Venue }}</p>
+                        <p class="small-text">Hosted by {{ booking.Organizer }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>You have no bookings yet.</p>
+        {% endif %}
+    </div>
+
+    <div class="panel panel-light">
+        <h3>My Hosted Events</h3>
+        {% if hosted_events %}
+            <ul class="list-card">
+                {% for event in hosted_events %}
+                    <li>
+                        <strong>{{ event.Title }}</strong>
+                        <p><strong>Theme:</strong> {{ event.Theme }}</p>
+                        <p>{{ event.Date }} | {{ event.Venue }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>You have not created any events yet.</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

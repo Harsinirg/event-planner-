@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Planner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+    <header class="topbar">
+        <div class="container nav-container">
+            <a class="brand" href="{{ url_for('home') }}">EVENTIFY</a>
+            <nav class="nav-links">
+                <a class="nav-item" href="{{ url_for('home') }}">Home</a>
+                {% if session.user_id %}
+                    <a class="nav-item" href="{{ url_for('create_event') }}">Create Event</a>
+                    <a class="nav-item" href="{{ url_for('dashboard') }}">Dashboard</a>
+                    <a class="nav-item" href="{{ url_for('logout') }}">Logout</a>
+                {% else %}
+                    <a class="nav-item" href="{{ url_for('login') }}">Login/Register</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-grid">
+                    {% for category, message in messages %}
+                        <div class="flash flash-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Event Planner. Simple booking and event creation.</p>
+    </footer>
+
+    <script>
+        const topbar = document.querySelector('.topbar');
+        window.addEventListener('scroll', () => {
+            topbar.classList.toggle('scrolled', window.scrollY > 16);
+        });
+
+        const footerElement = document.querySelector('.footer');
+        if (footerElement) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        footerElement.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+            observer.observe(footerElement);
+        }
+    </script>
+</body>
+</html>
